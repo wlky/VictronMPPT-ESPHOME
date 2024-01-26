@@ -94,7 +94,7 @@ void VictronComponent::loop() {
     state_ = 0;
   }
 
-  if (!available())
+  if (!available() || block_input_)
     return;
 
   last_transmission_ = now;
