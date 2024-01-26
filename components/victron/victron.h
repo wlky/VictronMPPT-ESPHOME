@@ -12,6 +12,7 @@ namespace victron {
 class VictronComponent : public uart::UARTDevice, public Component {
  public:
   void set_throttle(uint32_t throttle) { this->throttle_ = throttle; }
+  void set_block(bool block) { this->block_input_ = block; }
   void set_load_state_binary_sensor(binary_sensor::BinarySensor *load_state_binary_sensor) {
     load_state_binary_sensor_ = load_state_binary_sensor;
   }
@@ -290,6 +291,7 @@ class VictronComponent : public uart::UARTDevice, public Component {
   uint32_t last_transmission_{0};
   uint32_t last_publish_{0};
   uint32_t throttle_{0};
+  bool block_input_{false];
 };
 
 }  // namespace victron
