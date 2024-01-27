@@ -96,11 +96,12 @@ void VictronComponent::loop() {
 
   if (!available())
     return;
-  if(block_input_)
-      state_ = 3;
+
 
   last_transmission_ = now;
   while (available() && (millis() - last_transmission_ < 10)) {
+    if(block_input_)
+      state_ = 3;
     uint8_t c;
     read_byte(&c);
     if (state_ == 0) {
