@@ -88,11 +88,11 @@ void VictronComponent::dump_config() {  // NOLINT(google-readability-function-si
 
 void VictronComponent::loop() {
   const uint32_t now = millis();
- /* if ((state_ > 0) && (now - last_transmission_ >= 5000)) {
+  if ((state_ > 0) && (now - last_transmission_ >= 500)) {
     // last transmission too long ago. Reset RX index.
     ESP_LOGW(TAG, "Last transmission too long ago");
     state_ = 0;
-  }*/
+  }
 
   if (!available())
     return;
