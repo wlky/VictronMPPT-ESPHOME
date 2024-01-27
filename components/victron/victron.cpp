@@ -98,7 +98,7 @@ void VictronComponent::loop() {
     return;
 
   last_transmission_ = now;
-  while (available()) {
+  while (available() && (millis() - last_transmission_ < 40)) {
     uint8_t c;
     read_byte(&c);
     if (state_ == 0) {
