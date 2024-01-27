@@ -94,11 +94,11 @@ void VictronComponent::loop() {
     state_ = 0;
   }
 
-  if (!available() || block_input_)
+  if (!available() || (block_input_ && state_ == 0))
     return;
 
   last_transmission_ = now;
-  while (available() && (millis() - last_transmission_ < 40)) {
+  while (available() && (millis() - last_transmission_ < 20)) {
     uint8_t c;
     read_byte(&c);
     if (state_ == 0) {
