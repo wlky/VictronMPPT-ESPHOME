@@ -685,7 +685,10 @@ void VictronComponent::handle_value_() {
   if (label_ == "VPV") {
     // mV to V
     ESP_LOGW(TAG, "VPV: %s", value_.c_str());
-    this->publish_state_(panel_voltage_sensor_, atoi(value_.c_str()) / 1000.0f);  // NOLINT(cert-err34-c)
+    if (std::all_of(value_.begin(), value_.end(), ::isdigit)) {
+      // mV to V
+      this->publish_state_(panel_voltage_sensor_, atoi(value_.c_str()) / 1000.0f);  // NOLINT(cert-err34-c)
+    }
     return;
   }
 
