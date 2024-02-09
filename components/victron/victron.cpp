@@ -693,7 +693,9 @@ void VictronComponent::handle_value_() {
   }
 
   if (label_ == "PPV") {
-    this->publish_state_(panel_power_sensor_, atoi(value_.c_str()));  // NOLINT(cert-err34-c)
+    if (std::all_of(value_.begin(), value_.end(), ::isdigit)) {
+      this->publish_state_(panel_power_sensor_, atoi(value_.c_str()));  // NOLINT(cert-err34-c)
+    }
     return;
   }
 
